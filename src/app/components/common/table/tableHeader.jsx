@@ -11,7 +11,7 @@ const TableHeader = ({ onSort, selectedSort, columns }) => {
             onSort({ path: item, order: "asc" });
         }
     };
-    const sortArrow = (selectedSort, currentPath) => {
+    const rendeSortArrow = (selectedSort, currentPath) => {
         if (selectedSort.path === currentPath) {
             if (selectedSort.order === "asc") {
                 return <i className="bi bi-caret-down-fill"></i>;
@@ -36,25 +36,10 @@ const TableHeader = ({ onSort, selectedSort, columns }) => {
                         {...{ role: columns[column].path && "button" }}
                         scope="col"
                     >
-                        {columns[column].name}
-                        {sortArrow(selectedSort, columns[column].path)}
+                        {columns[column].name}{" "}
+                        {rendeSortArrow(selectedSort, columns[column].path)}
                     </th>
                 ))}
-
-                {/* <th scope="col">Качества</th>
-                <th onClick={() => handleSort("profession.name")} scope="col">
-                    Профессия
-                </th>
-                <th onClick={() => handleSort("completedMeetings")} scope="col">
-                    Встретился, раз
-                </th>
-                <th onClick={() => handleSort("rate")} scope="col">
-                    Оценка
-                </th>
-                <th onClick={() => handleSort("bookmark")} scope="col">
-                    Избранное
-                </th>
-                <th /> */}
             </tr>
         </thead>
     );
@@ -62,8 +47,7 @@ const TableHeader = ({ onSort, selectedSort, columns }) => {
 TableHeader.propTypes = {
     onSort: PropTypes.func.isRequired,
     selectedSort: PropTypes.object.isRequired,
-    columns: PropTypes.object.isRequired,
-    sortArrow: PropTypes.func.isRequired
+    columns: PropTypes.object.isRequired
 };
 
 export default TableHeader;
